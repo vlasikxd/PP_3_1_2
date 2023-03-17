@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User table</title>
+</head>
+<body>
+
+<table>
+    <tr style="color: #414141">
+        <th>id</th>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>email</th>
+    </tr>
+
+    <tr th:each="user : ${listUsers}">
+        <td th:utext="${user.id}"></td>
+        <td><a th:href="@{/{id}(id=${user.id})}"
+               th:text="${user.firstName}"></a>
+        </td>
+        <td th:utext="${user.lastName}"></td>
+        <td th:utext="${user.email}"></td>
+        <td>
+            <form th:method="DELETE" th:action="@{/{id}(id=${user.id})}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+        <td>
+            <form th:method="GET" th:action="@{/{id}/edit(id=${user.id})}">
+                <input type="submit" value="Update" />
+            </form>
+        </td>
+</table>
+
+
+<form action="/new">
+    <button>New user</button>
+</form>
+
+</body>
+</html>
